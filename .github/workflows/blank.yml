@@ -10,7 +10,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "pr-sanity-checks"
   pr-sanity-checks:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -20,8 +20,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Check if a branch other than develop is being merged to master
         shell: bash
-        run: if [ $GITHUB_HEAD_REF != "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::error No branch other than develop can be merged to master. Please change your base branch." && exit 1; else echo "::notice check successful"; fi
+        run: if [ $GITHUB_HEAD_REF != "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::error No branch other than develop can be merged to master. Your base branch is $GITHUB_BASE_REF and head branch is $GITHUB_HEAD_REF" && exit 1; else echo "::notice check successful"; fi
 
-      - name: Check if a branch master is merged to any other branch
+      - name: Check if a branch master is being merged to any other branch
         shell: bash
         run: if [ $GITHUB_HEAD_REF = "master" ]; then echo "::error Master branch cannot be merged to any other branch." && exit 1; else echo "::notice check successful" ; fi
