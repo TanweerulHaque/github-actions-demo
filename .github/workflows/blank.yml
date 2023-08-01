@@ -19,4 +19,4 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo "::notice head is => $GITHUB_HEAD_REF and target => $GITHUB_REF"
+        run: echo "::notice head is => $GITHUB_HEAD_REF and target => $GITHUB_BASE_REF"
