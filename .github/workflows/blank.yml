@@ -18,5 +18,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo "::notice head is => $GITHUB_HEAD_REF and target => $GITHUB_BASE_REF"
+      - name: Check if a branch other than develop is being merged to master
+        shell: bash
+        run: if [ $GITHUB_HEAD_REF = "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::notice check successful"; else echo "::error No branch other than develop can be merged to master. Please change your base branch" && exit 1 ; fi
