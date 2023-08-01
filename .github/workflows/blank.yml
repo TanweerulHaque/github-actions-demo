@@ -20,7 +20,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Check if a branch other than develop is being merged to master
         shell: bash
-        run: if [ $GITHUB_HEAD_REF = "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::notice check successful"; else echo "::error No branch other than develop can be merged to master. Please change your base branch" && exit 1 ; fi
+        run: if [ $GITHUB_HEAD_REF = "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::notice check successful"; else echo "::error No branch other than develop can be merged to master. Please change your base branch." && exit 1 ; fi
 
       - name: Check if a branch master is merged to any other branch
         shell: bash
