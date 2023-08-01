@@ -7,6 +7,7 @@ on:
   # Triggers the workflow on push or pull request events for the "master" and "develop" branches
   pull_request:
     branches: [ "master", "develop" ]
+    types: [ opened, edited, reopened, synchronize, ready_for_review, unlocked, auto_merge_enabled]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,7 +18,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Runs a single command using the runners shell
+      # Run each check
       - name: Check if a branch other than develop is being merged to master
         shell: bash
         run: if [ $GITHUB_HEAD_REF != "develop" ] && [ $GITHUB_BASE_REF = "master" ]; then echo "::error No branch other than develop can be merged to master. Your base branch is $GITHUB_BASE_REF and head branch is $GITHUB_HEAD_REF" && exit 1; else echo "::notice check successful"; fi
